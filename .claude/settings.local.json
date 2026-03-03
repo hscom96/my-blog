@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(timeout 31 hour)",
+      "Bash(cmd.exe:*)",
+      "mcp__playwright__browser_navigate"
+    ]
+  }
+}
