@@ -1,9 +1,9 @@
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: '소개',
-  description: '블로그 소개 페이지',
-}
+  title: "소개",
+  description: "블로그 소개 페이지",
+};
 
 export default function AboutPage() {
   return (
@@ -14,5 +14,5 @@ export default function AboutPage() {
         <p>개발, 기술, 일상 등 다양한 주제로 글을 작성합니다.</p>
       </div>
     </div>
-  )
+  );
 }

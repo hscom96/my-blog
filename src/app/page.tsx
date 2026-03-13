@@ -1,9 +1,9 @@
-import Link from 'next/link'
-import { getAllPosts } from '@/lib/posts'
-import PostCard from '@/components/blog/PostCard'
+import Link from "next/link";
+import { getAllPosts } from "@/lib/posts";
+import PostCard from "@/components/blog/PostCard";
 
 export default async function HomePage() {
-  const posts = (await getAllPosts()).slice(0, 5)
+  const posts = (await getAllPosts()).slice(0, 5);
 
   return (
     <div>
@@ -38,5 +38,5 @@ export default async function HomePage() {
         )}
       </section>
     </div>
-  )
+  );
 }

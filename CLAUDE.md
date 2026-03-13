@@ -28,14 +28,14 @@ Next.js 15 App Router 기반 Markdown 블로그입니다.
 
 ### 주요 경로
 
-| URL | 파일 |
-|-----|------|
-| `/` | `src/app/page.tsx` |
-| `/blog` | `src/app/blog/page.tsx` |
-| `/blog/[slug]` | `src/app/blog/[slug]/page.tsx` |
-| `/about` | `src/app/about/page.tsx` |
-| `/admin/write` | `src/app/admin/write/page.tsx` (글 작성 UI, 인증 없음) |
-| `POST /api/posts` | `src/app/api/posts/route.ts` |
+| URL               | 파일                                                   |
+| ----------------- | ------------------------------------------------------ |
+| `/`               | `src/app/page.tsx`                                     |
+| `/blog`           | `src/app/blog/page.tsx`                                |
+| `/blog/[slug]`    | `src/app/blog/[slug]/page.tsx`                         |
+| `/about`          | `src/app/about/page.tsx`                               |
+| `/admin/write`    | `src/app/admin/write/page.tsx` (글 작성 UI, 인증 없음) |
+| `POST /api/posts` | `src/app/api/posts/route.ts`                           |
 
 ### 타입
 

@@ -11,6 +11,7 @@ memory: project
 ## 프로젝트 컨텍스트
 
 현재 프로젝트는 Next.js 15 App Router 기반 Markdown 블로그입니다:
+
 - 포스트는 `content/posts/*.md` 파일시스템에서 직접 읽힘 (DB 없음)
 - `/admin/write` 페이지에 인증 없음 — 보안 취약 지점
 - `writePost()`가 런타임에 파일을 직접 씀
@@ -20,6 +21,7 @@ memory: project
 ## 리뷰 방법론
 
 ### 1단계: 코드 스캔
+
 최근 작성/수정된 코드를 파악합니다. 전체 코드베이스가 아닌 **변경된 코드**에 집중하되, 연관된 파일도 필요 시 확인합니다.
 
 ### 2단계: 보안 점검 (우선순위 높음)
@@ -27,50 +29,59 @@ memory: project
 다음 항목을 반드시 확인하세요:
 
 **입력 검증 & 인젝션**
+
 - 사용자 입력값의 sanitization 여부
 - Path traversal 취약점 (파일 경로 조작: `../` 등)
 - XSS 가능성 (마크다운/MDX 렌더링 시 스크립트 인젝션)
 - 슬러그 검증 로직 우회 가능성
 
 **인증 & 권한**
+
 - `/admin/*` 경로 보호 여부
 - API 엔드포인트 인증 미적용 여부
 - CSRF 취약점
 
 **파일시스템 보안**
+
 - `writePost()` 등 파일 쓰기 함수의 경로 검증
 - 허용되지 않은 파일 확장자/경로 쓰기 가능성
 - 파일명을 통한 디렉토리 탈출
 
 **데이터 노출**
+
 - 민감 정보(API 키, 환경변수) 클라이언트 노출
 - 에러 메시지의 스택 트레이스 노출
 - 불필요한 파일시스템 정보 노출
 
 **HTTP 보안**
+
 - 보안 헤더 누락 (CSP, X-Frame-Options 등)
 - HTTPS 강제 여부
 
 ### 3단계: 성능 점검
 
 **Next.js 최적화**
+
 - 불필요한 `'use client'` 사용 (서버 컴포넌트 활용 미흡)
 - `generateStaticParams` 미사용으로 인한 동적 렌더링
 - 이미지 최적화 (`next/image` 미사용)
 - 불필요한 리렌더링 (메모이제이션 부재)
 
 **데이터 로딩**
+
 - 파일시스템 읽기의 과도한 반복 호출
 - 캐싱 전략 부재 (fetch cache, revalidate)
 - N+1 패턴 (루프 내 반복 파일 읽기)
 - 불필요하게 큰 데이터 로드 (전체 포스트 본문을 목록에서 로드)
 
 **번들 최적화**
+
 - 무거운 라이브러리의 tree-shaking 미적용
 - 동적 import 미활용
 - 클라이언트 번들에 서버 전용 코드 포함
 
 **비동기 처리**
+
 - 병렬 처리 가능한 작업의 순차 실행
 - `Promise.all` 미활용
 - 불필요한 `await` 블로킹
@@ -123,6 +134,7 @@ memory: project
 리뷰를 수행하면서 발견한 패턴과 지식을 메모리에 축적하세요. 이는 이후 리뷰의 품질을 높입니다.
 
 다음을 기록하세요:
+
 - 이 프로젝트에서 반복적으로 발견되는 보안 패턴 또는 취약점
 - 성능 병목이 자주 발생하는 코드 영역
 - 이미 수정된 이슈 (중복 보고 방지)
@@ -154,6 +166,7 @@ There are several discrete types of memory that you can store in your memory sys
     user: I've been writing Go for ten years but this is my first time touching the React side of this repo
     assistant: [saves user memory: deep Go expertise, new to React and this project's frontend — frame frontend explanations in terms of backend analogues]
     </examples>
+
 </type>
 <type>
     <name>feedback</name>
@@ -168,6 +181,7 @@ There are several discrete types of memory that you can store in your memory sys
     user: stop summarizing what you just did at the end of every response, I can read the diff
     assistant: [saves feedback memory: this user wants terse responses with no trailing summaries]
     </examples>
+
 </type>
 <type>
     <name>project</name>
@@ -182,6 +196,7 @@ There are several discrete types of memory that you can store in your memory sys
     user: the reason we're ripping out the old auth middleware is that legal flagged it for storing session tokens in a way that doesn't meet the new compliance requirements
     assistant: [saves project memory: auth middleware rewrite is driven by legal/compliance requirements around session token storage, not tech-debt cleanup — scope decisions should favor compliance over ergonomics]
     </examples>
+
 </type>
 <type>
     <name>reference</name>
@@ -195,6 +210,7 @@ There are several discrete types of memory that you can store in your memory sys
     user: the Grafana board at grafana.internal/d/api-latency is what oncall watches — if you're touching request handling, that's the thing that'll page someone
     assistant: [saves reference memory: grafana.internal/d/api-latency is the oncall latency dashboard — check it when editing request-path code]
     </examples>
+
 </type>
 </types>
 
@@ -214,9 +230,15 @@ Saving a memory is a two-step process:
 
 ```markdown
 ---
-name: {{memory name}}
-description: {{one-line description — used to decide relevance in future conversations, so be specific}}
-type: {{user, feedback, project, reference}}
+name: { { memory name } }
+description:
+  {
+    {
+      one-line description — used to decide relevance in future conversations,
+      so be specific,
+    },
+  }
+type: { { user, feedback, project, reference } }
 ---
 
 {{memory content — for feedback/project types, structure as: rule/fact, then **Why:** and **How to apply:** lines}}
@@ -231,12 +253,15 @@ type: {{user, feedback, project, reference}}
 - Do not write duplicate memories. First check if there is an existing memory you can update before writing a new one.
 
 ## When to access memories
+
 - When specific known memories seem relevant to the task at hand.
 - When the user seems to be referring to work you may have done in a prior conversation.
 - You MUST access memory when the user explicitly asks you to check your memory, recall, or remember.
 
 ## Memory and other forms of persistence
+
 Memory is one of several persistence mechanisms available to you as you assist the user in a given conversation. The distinction is often that memory can be recalled in future conversations and should not be used for persisting information that is only useful within the scope of the current conversation.
+
 - When to use or update a plan instead of memory: If you are about to start a non-trivial implementation task and would like to reach alignment with the user on your approach you should use a Plan rather than saving this information to memory. Similarly, if you already have a plan within the conversation and you have changed your approach persist that change by updating the plan rather than saving a memory.
 - When to use or update tasks instead of memory: When you need to break your work in current conversation into discrete steps or keep track of your progress use tasks instead of saving to memory. Tasks are great for persisting information about the work that needs to be done in the current conversation, but memory should be reserved for information that will be useful in future conversations.
 

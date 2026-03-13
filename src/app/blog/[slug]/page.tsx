@@ -1,34 +1,34 @@
-import type { Metadata } from 'next'
-import Link from 'next/link'
-import { notFound } from 'next/navigation'
-import { MDXRemote } from 'next-mdx-remote/rsc'
-import { getPost } from '@/lib/posts'
-import { formatDate } from '@/lib/utils'
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import { getPost } from "@/lib/posts";
+import { formatDate } from "@/lib/utils";
 
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 interface Props {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug: rawSlug } = await params
-  const slug = decodeURIComponent(rawSlug)
-  const post = await getPost(slug)
-  if (!post) return {}
+  const { slug: rawSlug } = await params;
+  const slug = decodeURIComponent(rawSlug);
+  const post = await getPost(slug);
+  if (!post) return {};
 
   return {
     title: post.title,
     description: post.description,
-  }
+  };
 }
 
 export default async function PostPage({ params }: Props) {
-  const { slug: rawSlug } = await params
-  const slug = decodeURIComponent(rawSlug)
-  const post = await getPost(slug)
+  const { slug: rawSlug } = await params;
+  const slug = decodeURIComponent(rawSlug);
+  const post = await getPost(slug);
 
-  if (!post) notFound()
+  if (!post) notFound();
 
   return (
     <article>
@@ -61,5 +61,5 @@ export default async function PostPage({ params }: Props) {
         <MDXRemote source={post.content} />
       </div>
     </article>
-  )
+  );
 }

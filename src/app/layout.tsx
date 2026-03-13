@@ -1,23 +1,23 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    default: 'My Blog',
-    template: '%s | My Blog',
+    default: "My Blog",
+    template: "%s | My Blog",
   },
-  description: '개발, 기술, 일상을 기록하는 블로그',
-}
+  description: "개발, 기술, 일상을 기록하는 블로그",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="ko" suppressHydrationWarning>
@@ -31,5 +31,5 @@ export default function RootLayout({
         </div>
       </body>
     </html>
-  )
+  );
 }

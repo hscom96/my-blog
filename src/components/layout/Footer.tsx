@@ -5,5 +5,5 @@ export default function Footer() {
         <p>© 2026 My Blog. All rights reserved.</p>
       </div>
     </footer>
-  )
+  );
 }

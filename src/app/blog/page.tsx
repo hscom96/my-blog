@@ -1,14 +1,14 @@
-import type { Metadata } from 'next'
-import { getAllPosts } from '@/lib/posts'
-import PostCard from '@/components/blog/PostCard'
+import type { Metadata } from "next";
+import { getAllPosts } from "@/lib/posts";
+import PostCard from "@/components/blog/PostCard";
 
 export const metadata: Metadata = {
-  title: '블로그',
-  description: '모든 글 목록',
-}
+  title: "블로그",
+  description: "모든 글 목록",
+};
 
 export default async function BlogPage() {
-  const posts = await getAllPosts()
+  const posts = await getAllPosts();
 
   return (
     <div>
@@ -26,5 +26,5 @@ export default async function BlogPage() {
         </ul>
       )}
     </div>
-  )
+  );
 }
