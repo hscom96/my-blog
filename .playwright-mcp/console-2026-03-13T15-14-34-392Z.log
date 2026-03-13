@@ -1,0 +1,11 @@
+[  267625ms] [ERROR] ./src/lib/supabase.ts
+Error: 
+
+Caused by:
+    0: Failed to read source code from C:\Users\Admin\claude-test\src\lib\supabase.ts
+    1: 지정된 파일을 찾을 수 없습니다. (os error 2)
+
+Import trace for requested module:
+./src/lib/supabase.ts
+./src/lib/posts.ts
+./src/app/page.tsx @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/next-devtools/userspace/app/errors/intercept-console-error.js:56

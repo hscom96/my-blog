@@ -1,0 +1,2 @@
+[    4582ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/favicon.ico:0
+[  643245ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/blog/spring-webflux-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0?_rsc=7b2kd:0
