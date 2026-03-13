@@ -2,8 +2,8 @@ import Link from 'next/link'
 import { getAllPosts } from '@/lib/posts'
 import PostCard from '@/components/blog/PostCard'
 
-export default function HomePage() {
-  const posts = getAllPosts().slice(0, 5)
+export default async function HomePage() {
+  const posts = (await getAllPosts()).slice(0, 5)
 
   return (
     <div>

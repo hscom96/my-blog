@@ -25,7 +25,7 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
     return NextResponse.json({ error: '날짜 형식이 올바르지 않습니다. (YYYY-MM-DD)' }, { status: 400 })
 
   try {
-    updatePost(slug, body)
+    await updatePost(slug, body)
     return NextResponse.json({ slug }, { status: 200 })
   } catch (err) {
     if (err instanceof Error && err.message === 'POST_NOT_FOUND') {

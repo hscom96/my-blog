@@ -2,21 +2,19 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { MDXRemote } from 'next-mdx-remote/rsc'
-import { getAllPostSlugs, getPost } from '@/lib/posts'
+import { getPost } from '@/lib/posts'
 import { formatDate } from '@/lib/utils'
+
+export const dynamic = 'force-dynamic'
 
 interface Props {
   params: Promise<{ slug: string }>
 }
 
-export async function generateStaticParams() {
-  return getAllPostSlugs().map((slug) => ({ slug }))
-}
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug: rawSlug } = await params
   const slug = decodeURIComponent(rawSlug)
-  const post = getPost(slug)
+  const post = await getPost(slug)
   if (!post) return {}
 
   return {
@@ -28,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function PostPage({ params }: Props) {
   const { slug: rawSlug } = await params
   const slug = decodeURIComponent(rawSlug)
-  const post = getPost(slug)
+  const post = await getPost(slug)
 
   if (!post) notFound()
 

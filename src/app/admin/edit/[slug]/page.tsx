@@ -9,7 +9,7 @@ interface Props {
 export default async function EditPage({ params }: Props) {
   const { slug: rawSlug } = await params
   const slug = decodeURIComponent(rawSlug)
-  const post = getPost(slug)
+  const post = await getPost(slug)
 
   if (!post) notFound()
 

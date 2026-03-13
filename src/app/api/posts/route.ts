@@ -24,11 +24,11 @@ export async function POST(request: NextRequest) {
   if (!/^[a-z0-9가-힣ㄱ-ㅎㅏ-ㅣ-]+$/.test(body.slug))
     return NextResponse.json({ error: '슬러그에 허용되지 않는 문자가 포함되어 있습니다.' }, { status: 400 })
 
-  if (slugExists(body.slug))
+  if (await slugExists(body.slug))
     return NextResponse.json({ error: '이미 존재하는 슬러그입니다.' }, { status: 409 })
 
   try {
-    writePost(body)
+    await writePost(body)
     return NextResponse.json({ slug: body.slug }, { status: 201 })
   } catch {
     return NextResponse.json({ error: '글 저장 중 오류가 발생했습니다.' }, { status: 500 })
